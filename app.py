@@ -45,13 +45,11 @@ def fetch_user_by_id(user_id: int) -> Optional[Dict[str, Any]]:
     return row_to_dict(row) if row else None
 
 
-
 @app.route("/", methods=["GET"])
 def homePage():
     return "Welcome to the Warehouse Maintenance API!", 200
 
 
-    
 @app.route("/api/v1/users", methods=["GET"])
 def list_users():
     with get_connection() as connection:
@@ -206,7 +204,9 @@ def create_log():
     user_id = payload.get("user_id")
 
     if not all([title, description, priority, status]):
-        return jsonify({"error": "title, description, priority, and status are required"}), 400
+        return jsonify(
+            {"error": "title, description, priority, and status are required"}
+        ), 400
 
     with get_connection() as connection:
         cursor = connection.execute(
