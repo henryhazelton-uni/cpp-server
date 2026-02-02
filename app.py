@@ -3,12 +3,14 @@ import sqlite3
 from typing import Any, Dict, Optional
 
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 from werkzeug.security import check_password_hash, generate_password_hash
 
 API_KEY = "api_warehouse_student_key_1234567890abcdef"
 DB_PATH = "warehouse.db"
 
 app = Flask(__name__)
+CORS(app)
 
 
 def get_connection() -> sqlite3.Connection:
